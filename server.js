@@ -7,7 +7,7 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 import errorHandler from "./middleware/error.js";
 
-// ROUTES — MUST BE ES MODULES & EXPORT DEFAULT
+// ROUTES
 import authRoutes from "./routes/auth.js";
 import vendorRoutes from "./routes/vendors.js";
 import productRoutes from "./routes/products.js";
@@ -17,11 +17,19 @@ import userRoutes from "./routes/users.js";
 import subcategoryRoutes from "./routes/subcategoryRoutes.js";
 
 const app = express();
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "*", // Allow all for now — fix frontend network error
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 app.use(express.json());
 app.use(morgan("dev"));
 
-// API ROUTES
+// ROUTES
 app.use("/api/auth", authRoutes);
 app.use("/api/vendors", vendorRoutes);
 app.use("/api/products", productRoutes);
@@ -33,7 +41,6 @@ app.use("/api/user", userRoutes);
 // ERROR HANDLER
 app.use(errorHandler);
 
-// START SERVER
 const PORT = process.env.PORT || 5000;
 
 connectDB(process.env.MONGO_URI)
