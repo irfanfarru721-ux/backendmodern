@@ -12,9 +12,9 @@ import authRoutes from "./routes/auth.js";
 import vendorRoutes from "./routes/vendors.js";
 import productRoutes from "./routes/products.js";
 import categoryRoutes from "./routes/categories.js";
-import adminRoutes from "./routes/admin.js";
 import userRoutes from "./routes/users.js";
 import subcategoryRoutes from "./routes/subcategoryRoutes.js";
+import adminAuthRoutes from "./routes/adminAuth.js";
 
 const app = express();
 
@@ -35,8 +35,8 @@ app.use("/api/vendors", vendorRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/subcategories", subcategoryRoutes);
-app.use("/api/admin", adminRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/admin/auth", adminAuthRoutes);
 
 // ERROR HANDLER
 app.use(errorHandler);
