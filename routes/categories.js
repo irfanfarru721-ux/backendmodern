@@ -3,13 +3,10 @@ import Category from "../models/Category.js";
 
 const router = express.Router();
 
-// GET categories (optional vendor filter)
+// GET all categories
 router.get("/", async (req, res, next) => {
   try {
-    const { vendor } = req.query;
-    const filter = {};
-    if (vendor) filter.vendor = vendor;
-    const categories = await Category.find(filter);
+    const categories = await Category.find();
     res.json(categories);
   } catch (err) {
     next(err);

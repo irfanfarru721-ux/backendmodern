@@ -3,8 +3,18 @@ import mongoose from "mongoose";
 const vendorSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    type: { type: String, required: false }, // e.g., 'restaurant','grocery','fruits'
-    owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: false },
+
+    category: { type: String, required: true }, // "restaurant"
+
+    subcategories: [
+      {
+        type: String, 
+        enum: ["veg", "non-veg", "biryani", "snacks", "drinks", "desserts"],
+      }
+    ],
+
+    type: { type: String },
+    owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     email: String,
     phone: String,
     address: String,
